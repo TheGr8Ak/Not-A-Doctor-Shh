@@ -227,19 +227,24 @@
             <p id="error"></p>
         </div>
         
-        <div id="imagePage" class="page">
-            <h2>Please Wear Your Headphones</h2>
-            <div class="media-container">
-                <source src="https://raw.githubusercontent.com/TheGr8Ak/Not-A-Doctor-Shh/main/headphones.mp4" type="video/mp4">
-            </div>
-            <button onclick="goToVideo1()">Yes, I am wearing headphones</button>
+        <div id="videoPage1" class="page">
+    <h2>Just Checking...</h2>
+    <div class="media-container">
+        <video id="video1" autoplay loop muted playsinline>
+            <source src="https://raw.githubusercontent.com/TheGr8Ak/Not-A-Doctor-Shh/main/headphones.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay">
+            <button onclick="toggleMute('video1')" class="video-control">Toggle Sound</button>
         </div>
+    </div>
+    <button onclick="goToVideo1()">Yes, I am wearing headphones</button>
+</div>
         
         <div id="videoPage1" class="page">
             <h2>Just Checking...</h2>
             <div class="media-container">
                 <video id="video1" autoplay loop muted playsinline>
-                    <source src="C:\Users\jayde\Downloads\oh-really-did-you-kevin-hart.mp4" type="video/mp4">
+                    <source src="https://raw.githubusercontent.com/TheGr8Ak/Not-A-Doctor-Shh/main/kevin-hart.mp4" type="video/mp4">
                 </video>
                 <div class="video-overlay">
                     <button onclick="toggleMute('video1')" class="video-control">Toggle Sound</button>
@@ -252,7 +257,7 @@
             <h2>Are You Sure?</h2>
             <div class="media-container">
                 <video id="video2" autoplay loop muted playsinline>
-                    <source src="C:\Users\jayde\Downloads\john-cena.mp4" type="video/mp4">
+                    <source src="https://raw.githubusercontent.com/TheGr8Ak/Not-A-Doctor-Shh/main/john-cena.mp4" type="video/mp4">
                 </video>
                 <div class="video-overlay">
                     <button onclick="toggleMute('video2')" class="video-control">Toggle Sound</button>
