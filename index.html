@@ -196,6 +196,30 @@
             background: #F3F4F6;
         }
 
+        .message-container {
+            padding: 1rem;
+            background: #F3F4F6;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+        }
+
+        .message-text {
+            line-height: 1.6;
+        }
+
+        .message-text p {
+            margin-bottom: 1rem;
+        }
+
+        .emphasis {
+            font-weight: 600;
+            color: #4C1D95;
+        }
+
+        .emoji {
+            font-style: normal;
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 1rem;
@@ -227,27 +251,27 @@
             <p id="error"></p>
         </div>
         
-        <div id="videoPage1" class="page">
-    <h2>Just Checking...</h2>
-    <div class="media-container">
-        <video id="video1" autoplay loop muted playsinline>
-            <source src="https://raw.githubusercontent.com/TheGr8Ak/Not-A-Doctor-Shh/main/headphones.mp4" type="video/mp4">
-        </video>
-        <div class="video-overlay">
-            <button onclick="toggleMute('video1')" class="video-control">Toggle Sound</button>
+        <div id="imagePage" class="page">
+            <h2>Just Checking...</h2>
+            <div class="media-container">
+                <video id="headphones-video" autoplay loop muted playsinline>
+                    <source src="https://raw.githubusercontent.com/TheGr8Ak/Not-A-Doctor-Shh/main/headphones.mp4" type="video/mp4">
+                </video>
+                <div class="video-overlay">
+                    <button onclick="toggleMute('headphones-video')" class="video-control">Toggle Sound</button>
+                </div>
+            </div>
+            <button onclick="goToVideo1()">Yes, I am wearing headphones</button>
         </div>
-    </div>
-    <button onclick="goToVideo1()">Yes, I am wearing headphones</button>
-</div>
         
         <div id="videoPage1" class="page">
             <h2>Just Checking...</h2>
             <div class="media-container">
-                <video id="video1" autoplay loop muted playsinline>
+                <video id="kevin-video" autoplay loop muted playsinline>
                     <source src="https://raw.githubusercontent.com/TheGr8Ak/Not-A-Doctor-Shh/main/kevin-hart.mp4" type="video/mp4">
                 </video>
                 <div class="video-overlay">
-                    <button onclick="toggleMute('video1')" class="video-control">Toggle Sound</button>
+                    <button onclick="toggleMute('kevin-video')" class="video-control">Toggle Sound</button>
                 </div>
             </div>
             <button onclick="goToVideo2()">Yes, I did</button>
@@ -256,11 +280,11 @@
         <div id="videoPage2" class="page">
             <h2>Are You Sure?</h2>
             <div class="media-container">
-                <video id="video2" autoplay loop muted playsinline>
+                <video id="cena-video" autoplay loop muted playsinline>
                     <source src="https://raw.githubusercontent.com/TheGr8Ak/Not-A-Doctor-Shh/main/john-cena.mp4" type="video/mp4">
                 </video>
                 <div class="video-overlay">
-                    <button onclick="toggleMute('video2')" class="video-control">Toggle Sound</button>
+                    <button onclick="toggleMute('cena-video')" class="video-control">Toggle Sound</button>
                 </div>
             </div>
             <button onclick="goToTextPage()">Ok, I believe you</button>
@@ -328,24 +352,21 @@
         function goToVideo1() {
             document.getElementById("imagePage").style.display = "none";
             document.getElementById("videoPage1").style.display = "block";
-            const video1 = document.getElementById("video1");
-            video1.play();
+            document.getElementById("kevin-video").play();
+            document.getElementById("headphones-video").pause();
         }
         
         function goToVideo2() {
             document.getElementById("videoPage1").style.display = "none";
             document.getElementById("videoPage2").style.display = "block";
-            const video1 = document.getElementById("video1");
-            const video2 = document.getElementById("video2");
-            video1.pause();
-            video2.play();
+            document.getElementById("kevin-video").pause();
+            document.getElementById("cena-video").play();
         }
         
         function goToTextPage() {
             document.getElementById("videoPage2").style.display = "none";
             document.getElementById("textPage").style.display = "block";
-            const video2 = document.getElementById("video2");
-            video2.pause();
+            document.getElementById("cena-video").pause();
         }
 
         function goToFinalVideo() {
