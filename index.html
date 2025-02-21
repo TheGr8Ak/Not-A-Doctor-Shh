@@ -41,6 +41,10 @@
             animation: fadeIn 0.5s ease-out;
         }
 
+        .page.active {
+            display: block;
+        }
+
         #login {
             display: block;
         }
@@ -237,7 +241,7 @@
 </head>
 <body>
     <div class="container">
-        <div id="login" class="page">
+        <div id="login" class="page active">
             <h2>Welcome Back</h2>
             <div class="input-group">
                 <p class="hint">Username: 4-letter acronym for a movie we know</p>
@@ -251,7 +255,7 @@
             <p id="error"></p>
         </div>
         
-        <div id="imagePage" class="page">
+        <div id="headphonesPage" class="page">
             <h2>Just Checking...</h2>
             <div class="media-container">
                 <video id="headphones-video" autoplay loop muted playsinline>
@@ -325,14 +329,28 @@
             admin: "password",
             atbp: "eventually"
         };
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.style.display = 'none';
+            });
+            
+            const pageToShow = document.getElementById(pageId);
+            if (pageToShow) {
+                pageToShow.style.display = 'block';
+                console.log(`Showing page: ${pageId}`);
+            } else {
+                console.error(`Page not found: ${pageId}`);
+            }
+        }
         
         function authenticate() {
             const user = document.getElementById("username").value.toLowerCase();
             const pass = document.getElementById("password").value.toLowerCase();
             
             if (credentials[user] && credentials[user] === pass) {
-                document.getElementById("login").style.display = "none";
-                document.getElementById("imagePage").style.display = "block";
+                console.log("Authentication successful");
+                showPage('headphonesPage');
             } else {
                 const error = document.getElementById("error");
                 error.innerText = "Invalid username or password";
@@ -346,33 +364,52 @@
 
         function toggleMute(videoId) {
             const video = document.getElementById(videoId);
-            video.muted = !video.muted;
+            if (video) {
+                video.muted = !video.muted;
+            }
         }
 
         function goToVideo1() {
-            document.getElementById("imagePage").style.display = "none";
-            document.getElementById("videoPage1").style.display = "block";
-            document.getElementById("kevin-video").play();
-            document.getElementById("headphones-video").pause();
+            const headphonesVideo = document.getElementById("headphones-video");
+            if (headphonesVideo) {
+                headphonesVideo.pause();
+            }
+            showPage('videoPage1');
+            const kevinVideo = document.getElementById("kevin-video");
+            if (kevinVideo) {
+                kevinVideo.play();
+            }
         }
         
         function goToVideo2() {
-            document.getElementById("videoPage1").style.display = "none";
-            document.getElementById("videoPage2").style.display = "block";
-            document.getElementById("kevin-video").pause();
-            document.getElementById("cena-video").play();
+            const kevinVideo = document.getElementById("kevin-video");
+            if (kevinVideo) {
+                kevinVideo.pause();
+            }
+            showPage('videoPage2');
+            const cenaVideo = document.getElementById("cena-video");
+            if (cenaVideo) {
+                cenaVideo.play();
+            }
         }
         
         function goToTextPage() {
-            document.getElementById("videoPage2").style.display = "none";
-            document.getElementById("textPage").style.display = "block";
-            document.getElementById("cena-video").pause();
+            const cenaVideo = document.getElementById("cena-video");
+            if (cenaVideo) {
+                cenaVideo.pause();
+            }
+            showPage('textPage');
         }
 
         function goToFinalVideo() {
-            document.getElementById("textPage").style.display = "none";
-            document.getElementById("finalVideoPage").style.display = "block";
+            showPage('finalVideoPage');
         }
+
+        document.getElementById("password").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                authenticate();
+            }
+        });
     </script>
 </body>
 </html>
