@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #1F2937;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .page {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            width: 100%;
+            max-width: 500px;
+            margin: auto;
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        #login {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: #4C1D95;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .hint {
+            font-size: 0.9rem;
+            color: #6B7280;
+            margin-bottom: 8px;
+            transition: color 0.3s ease;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            margin: 8px 0;
+            border: 2px solid #E5E7EB;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #F9FAFB;
+        }
+
+        input:focus {
+            border-color: #8B5CF6;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+            background: white;
+        }
+
+        button {
+            background: #6D28D9;
+            color: white;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.3s ease;
+            margin: 1.5rem 0;
+        }
+
+        button:hover {
+            background: #5B21B6;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(109, 40, 217, 0.2);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .media-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            margin: 1.5rem 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .media-container img,
+        .media-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #F3F4F6;
+            border-radius: 12px;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .video-overlay:hover {
+            opacity: 1;
+        }
+
+        .video-control {
+            background: rgba(109, 40, 217, 0.9);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            width: auto;
+            margin: 0;
+        }
+
+        .video-control:hover {
+            background: rgba(91, 33, 182, 0.9);
+        }
+
+        #error {
+            color: #DC2626;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 8px;
+            border-radius: 8px;
+            background: #FEE2E2;
+            display: none;
+        }
+
+        .youtube-link {
+            display: block;
+            text-align: center;
+            color: #6D28D9;
+            text-decoration: none;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 2px solid #E5E7EB;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .youtube-link:hover {
+            border-color: #8B5CF6;
+            background: #F3F4F6;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .page {
+                padding: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="login" class="page">
+            <h2>Welcome Back</h2>
+            <div class="input-group">
+                <p class="hint">Username: 4-letter acronym for a movie we know</p>
+                <input type="text" id="username" placeholder="Enter username" autocomplete="username">
+            </div>
+            <div class="input-group">
+                <p class="hint">Password: A word which means "in the end/after an unspecified period of time"</p>
+                <input type="password" id="password" placeholder="Enter password" autocomplete="current-password">
+            </div>
+            <button onclick="authenticate()">Sign In</button>
+            <p id="error"></p>
+        </div>
+        
+        <div id="imagePage" class="page">
+            <h2>Please Wear Your Headphones</h2>
+            <div class="media-container">
+                <img src="C:\Users\jayde\OneDrive\Pictures\Screenshots\Screenshot 2025-02-17 225001.png" alt="Headphones confirmation">
+            </div>
+            <button onclick="goToVideo1()">Yes, I am wearing headphones</button>
+        </div>
+        
+        <div id="videoPage1" class="page">
+            <h2>Just Checking...</h2>
+            <div class="media-container">
+                <video id="video1" autoplay loop muted playsinline>
+                    <source src="C:\Users\jayde\Downloads\oh-really-did-you-kevin-hart.mp4" type="video/mp4">
+                </video>
+                <div class="video-overlay">
+                    <button onclick="toggleMute('video1')" class="video-control">Toggle Sound</button>
+                </div>
+            </div>
+            <button onclick="goToVideo2()">Yes, I did</button>
+        </div>
+        
+        <div id="videoPage2" class="page">
+            <h2>Are You Sure?</h2>
+            <div class="media-container">
+                <video id="video2" autoplay loop muted playsinline>
+                    <source src="C:\Users\jayde\Downloads\john-cena.mp4" type="video/mp4">
+                </video>
+                <div class="video-overlay">
+                    <button onclick="toggleMute('video2')" class="video-control">Toggle Sound</button>
+                </div>
+            </div>
+            <button onclick="goToTextPage()">Ok, I believe you</button>
+        </div>
+        
+        <div id="textPage" class="page">
+            <h2>A Humble Request</h2>
+            <div class="message-container">
+                <div class="message-text">
+                    <p><span class="emphasis">This is NOT a publicity stunt</span> - that's why I have a special request.</p>
+                    
+                    <p>Please do not forward or share this link or its contents with others. It took a lot of time and effort to create this, and I want to keep it personal.</p>
+                    <p>Please do not show the contents of this link to others</p>
+                    <p>If anyone is present in your vicinity, please:</p>
+                    <p>• Ask them to excuse you for a brief moment, or<br>
+                    • Check the contents of the link when you can do so </p>
+                    
+                    <p><span class="emphasis">Didu is the only person I give permission to view this apart from you.</span></p>
+                    
+                    <p>Once again, I sincerely request you to maintain the confidentiality of this message</p>
+                    
+                    <p>Thank you <span class="emoji">🙏🏻</span></p>
+                </div>
+            </div>
+            <button onclick="goToFinalVideo()">I Understand</button>
+        </div>
+        
+        <div id="finalVideoPage" class="page">
+            <h2></h2>
+            <a href="https://youtu.be/8mOY_0LU9wk" target="_blank" class="youtube-link">
+                A Note From A Stranger
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const credentials = {
+            admin: "password",
+            atbp: "eventually"
+        };
+        
+        function authenticate() {
+            const user = document.getElementById("username").value.toLowerCase();
+            const pass = document.getElementById("password").value.toLowerCase();
+            
+            if (credentials[user] && credentials[user] === pass) {
+                document.getElementById("login").style.display = "none";
+                document.getElementById("imagePage").style.display = "block";
+            } else {
+                const error = document.getElementById("error");
+                error.innerText = "Invalid username or password";
+                error.style.display = "block";
+                
+                setTimeout(() => {
+                    error.style.display = "none";
+                }, 3000);
+            }
+        }
+
+        function toggleMute(videoId) {
+            const video = document.getElementById(videoId);
+            video.muted = !video.muted;
+        }
+
+        function goToVideo1() {
+            document.getElementById("imagePage").style.display = "none";
+            document.getElementById("videoPage1").style.display = "block";
+            const video1 = document.getElementById("video1");
+            video1.play();
+        }
+        
+        function goToVideo2() {
+            document.getElementById("videoPage1").style.display = "none";
+            document.getElementById("videoPage2").style.display = "block";
+            const video1 = document.getElementById("video1");
+            const video2 = document.getElementById("video2");
+            video1.pause();
+            video2.play();
+        }
+        
+        function goToTextPage() {
+            document.getElementById("videoPage2").style.display = "none";
+            document.getElementById("textPage").style.display = "block";
+            const video2 = document.getElementById("video2");
+            video2.pause();
+        }
+
+        function goToFinalVideo() {
+            document.getElementById("textPage").style.display = "none";
+            document.getElementById("finalVideoPage").style.display = "block";
+        }
+    </script>
+</body>
+</html>
